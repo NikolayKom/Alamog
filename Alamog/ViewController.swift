@@ -20,16 +20,16 @@ class ViewController: UIViewController {
     
     var emojiCollection = ["🌛","🌜","🌚","🌕","🌖","🌗","🌘","🌑","🌒","🌓","🌔"]
     
-    var emojiDictionary = [Int:String]()
+    var emojiDictionary = [Card:String]()
     
     func emojiIdentifier(for card: Card) -> String {
-        if emojiDictionary[card.identifier] == nil {
+        if emojiDictionary[card] == nil {
             let randomIndex =
                 Int(arc4random_uniform(UInt32(emojiCollection.count)))
-            emojiDictionary[card.identifier] =
+            emojiDictionary[card] =
                 emojiCollection.remove(at: randomIndex)
         }
-        return emojiDictionary[card.identifier] ?? "?"
+        return emojiDictionary[card] ?? "?"
     }
     
     func updateViewFromModel() {
