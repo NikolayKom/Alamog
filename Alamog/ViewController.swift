@@ -14,7 +14,12 @@ class ViewController: UIViewController {
     
     var touches = 0 {
         didSet{
-            touchLabel.text = "Touches: \(touches)"
+            let attributes: [NSAttributedString.Key: Any] = [
+                .strokeWidth: 5.0,
+                .strokeColor: UIColor.red
+                ]
+            let attributedString = NSAttributedString(string: "Touches: \(touches)", attributes: attributes)
+            touchLabel.attributedText = attributedString
         }
     }
     
