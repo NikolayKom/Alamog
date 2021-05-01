@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         }
     }
     
-    var emojiCollection = ["🌛","🌜","🌚","🌕","🌖","🌗","🌘","🌑","🌒","🌓","🌔"]
+    var emojiCollection = ["🌛","🌜","🌚","🌕","🌖","🌗","🌘","🌑","🌒","🌓","🌔","🍄","⛅️","🌨","🌩"]
     
     var emojiDictionary = [Card:String]()
     
@@ -39,6 +39,7 @@ class ViewController: UIViewController {
     
     func updateViewFromModel() {
         for index in buttonCollection.indices {
+            
             let button = buttonCollection[index]
             let card = game.cards[index]
             if card.isFaceUp {
@@ -50,6 +51,32 @@ class ViewController: UIViewController {
             }
         }
     }
+
+    
+    func maybeWin() {
+        var indexOfCards = 0
+        
+        for index in buttonCollection.indices {
+            let card = game.cards[index]
+            if card.isMathed {
+                indexOfCards += 1
+            }
+        }
+        
+        
+        if indexOfCards == buttonCollection.count {
+            print(indexOfCards)
+            print(buttonCollection.count)
+            touchLabel.text = "You are Win!"
+            
+            let alert = UIAlertController(title: "You are Win!", message: "Your score \(touches)", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+
+            self.present(alert, animated: true)
+        }
+    
+    }
     
 
     @IBOutlet var buttonCollection: [UIButton]!
@@ -58,8 +85,10 @@ class ViewController: UIViewController {
     @IBAction func buttonAction(_ sender: UIButton) {
         touches += 1
         if let buttonIndex = buttonCollection.firstIndex(of: sender) {
+            
             game.chooseCard(at: buttonIndex)
             updateViewFromModel()
+            maybeWin()
         }
     }
 }

@@ -9,6 +9,7 @@ import Foundation
 class Game {
     var cards = [Card]()
     
+    
     var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
             
@@ -26,8 +27,7 @@ class Game {
         if !cards[index].isMathed {
             if let matchingIndex = indexOfOneAndOnlyFaceUpCard,
                matchingIndex != index {
-                if cards[matchingIndex] ==
-                    cards[index] {
+                if cards[matchingIndex] == cards[index] {
                     cards[matchingIndex].isMathed = true
                     cards[index].isMathed = true
                 }
